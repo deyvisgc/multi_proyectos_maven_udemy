@@ -1,0 +1,28 @@
+server:
+  port: 8786
+spring:
+  application:
+    name: admin-server
+    #configuracion de eureka client
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    metadata-map:
+      startup: ${random.init}
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+ # configurar la visualizacion de los servicios en charts
+ #  include = le dijo que agarre todos los micro esto se debe cambiar segun lo que quieres en produccion
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+
